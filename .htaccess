@@ -1,0 +1,42 @@
+# Este archivo .htaccess hace lo siguiente:
+# 1. Activa el motor de reescritura (RewriteEngine On).
+# 2. Verifica si el archivo solicitado no existe (RewriteCond %{REQUEST_FILENAME} !-f).
+# 3. Verifica si el directorio solicitado no existe (RewriteCond %{REQUEST_FILENAME} !-d).
+# 4. Redirige todas las solicitudes a index.php, pasando la URL solicitada como un parámetro (index.php?url=$1).
+
+# No permitir listar directorios en el navegador
+Options All -Indexes
+
+# Reglas de reescritura 
+<ifModule mod_rewrite.c>    
+    RewriteEngine on
+
+    # Reescribir /SDT/archivo a /App/Views/archivo.php
+    RewriteRule ^([a-zA-Z0-9_-]+)$ App/Views/$1.php [L]
+
+    # Manejar solicitudes de archivos PHP en app/views
+    RewriteCond %{REQUEST_FILENAME} !-d 
+    RewriteCond %{DOCUMENT_ROOT}/SDT/App/Views/$1.php -f
+    RewriteRule ^(.*)$ App/Views/$1.php [L,QSA]
+
+    # Agrega a cod_verif una variable GET oculta en la reescritura 
+    RewriteRule ^verificar/([0-9]+)$ App/Views/cod_verif.php?id=$1&from_rewrite=1 [L]
+
+    # Evitar acceder a cod_verif.php con letras en el parámetro id 
+    RewriteCond %{QUERY_STRING} !^[0-9]+$ [NC]
+    RewriteRule ^App/Views/cod_verif.php?id=$1$ index.php [L]
+
+    # Si no es un archivo o directorio existente, redirige a index.php
+    #RewriteCond %{REQUEST_FILENAME} !-f
+    #RewriteCond %{REQUEST_FILENAME} !-d
+    #RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+</ifModule> 
+
+# Página 404 personalizada
+ErrorDocument 404 /SDT/error404.php
+
+# Asegurando el archivo htaccess que no accedan en el navegador
+<Files ".htaccess">
+    Require all denied
+</Files>
