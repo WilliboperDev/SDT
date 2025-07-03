@@ -1,6 +1,5 @@
 <?php
 // Configuración de conexión a la base de datos utilizando la librería Medoo
-// (NO SUBIR A REPOSITORIO PUBLICO)
 $credencialesPath = __DIR__ .'/../Libs/autoload.php';
 if (!file_exists($credencialesPath)) {
     throw new RuntimeException('Archivo de libreria no encontrado');
