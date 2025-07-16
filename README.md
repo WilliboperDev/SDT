@@ -20,6 +20,7 @@ Aplicación web para gestionar y buscar contactos fácilmente.
 2. Libreria [Medoo] — Micro ORM para PHP
 3. Libreria [Phpmailer] — Envio de correo
 4. Libreria [phpdotenv] — variables de entorno
+5. Instalar composer en `/SDT/App/Libs` _Crear la carpeta Libs_:
 
 > [!IMPORTANT]
 > _Asegúrate de instalar o incluir las librerías necesarias antes de ejecutar la aplicación._
