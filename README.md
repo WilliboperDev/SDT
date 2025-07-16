@@ -19,7 +19,8 @@ Aplicación web para gestionar y buscar contactos fácilmente.
 3. Libreria [Phpmailer] — Envio de correo
 4. Libreria [phpdotenv] — variables de entorno
 
-_Asegúrate de instalar o incluir las librerías necesarias antes de ejecutar la aplicación._
+> [!IMPORTANT]
+> _Asegúrate de instalar o incluir las librerías necesarias antes de ejecutar la aplicación._
 
 ---
 Desarrollado por Williboper.  
