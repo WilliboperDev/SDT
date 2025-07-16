@@ -6,9 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405); 
     exit(json_encode(['error' => 'Metodo no permitido']));
 }
-
-require_once __DIR__ . '/../Config/conexion.php';
-require_once __DIR__ . '/../Controllers/registro_controller.php';
+require_once dirname(__DIR__) . '/Config/def_ruta.php';
+require_once ROOT_PATH . '/Config/conexion.php';
+require_once ROOT_PATH . '/Controllers/registro_controller.php';
 
 if (!isset($database)) { // Si no hay conexión a la base de datos
     http_response_code(400);

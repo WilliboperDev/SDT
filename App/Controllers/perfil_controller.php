@@ -1,7 +1,8 @@
 <?php
 // Logica de control para el perfil de usuario
-require_once __DIR__ . '/../Models/perfil_model.php';
-require_once __DIR__ . '/../Models/login_model.php';
+require_once dirname(__DIR__) . '/Config/def_ruta.php';
+require_once ROOT_PATH . '/Models/perfil_model.php';
+require_once ROOT_PATH . '/Models/login_model.php';
 
 function obtener_perfil($db, $email) {
     $perfil = obtener_perfil_usuario($db, $email);

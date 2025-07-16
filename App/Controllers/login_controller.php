@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../Models/login_model.php';
+require_once ROOT_PATH . '/Models/login_model.php';
 
 function procesar_login($db, $correo, $clave) {
     $usuarios = buscar_usuario_por_email($db, $correo);

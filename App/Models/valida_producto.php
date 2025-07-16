@@ -13,8 +13,9 @@ if (!isset($user) || empty($user)) {
     echo json_encode([]);
     exit;
 }
-require_once __DIR__ . '/../Config/conexion.php';
-require_once __DIR__ . '/../Controllers/producto_controller.php';
+require_once dirname(__DIR__) . '/Config/def_ruta.php';
+require_once ROOT_PATH . '/Config/conexion.php';
+require_once ROOT_PATH . '/Controllers/producto_controller.php';
 
 // Verificar si la conexión a la base de datos está disponible
 if (!isset($database)) { 
@@ -96,6 +97,7 @@ try {
             }
             // Campo imagen
             $producto = $_FILES['hiddenProductImage'] ?? null;
+
             if (isset($producto['name']) && $producto['error'] === UPLOAD_ERR_OK) { 
                 //error_log(Print_r($avatar,true));
 
@@ -132,7 +134,7 @@ try {
                     exit;
                 }
                 // Mover el archivo a una ubicación segura
-                $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/SDT/Public/img/avatars/' . $id_user . '/';
+                $uploadDir = ROOT_PATH2 . '/Public/img/avatars/' . $id_user . '/';
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0755, true); // Crear el directorio si no existe
                 }
@@ -150,7 +152,7 @@ try {
                 exit;
             }
             // Ruta a guardar en BD
-            $urlcorta = '/SDT/Public/img/avatars/' . $id_user . '/' . $newFileName;
+            $urlcorta = 'Public/img/avatars/' . $id_user . '/' . $newFileName;
 
             // Guardar datos
             $addPro = insertar_producto($database, $nombre, $descripcion, $urlcorta, $id_user, );
@@ -184,7 +186,7 @@ try {
                 echo json_encode(['success' => false, 'error' => 'Error al eliminar el producto.']);
                 exit;
             }
-            $filePath = $_SERVER['DOCUMENT_ROOT'] . $producto;
+            $filePath = ROOT_PATH2 . '/' . $producto;
             if (file_exists($filePath)) {
                 unlink($filePath); // Eliminar el archivo de imagen
             } 

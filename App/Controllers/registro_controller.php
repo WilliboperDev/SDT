@@ -1,8 +1,9 @@
 <?php
 // Lógica de control para el registro de usuarios
-require_once __DIR__ . '/../Models/login_model.php';
-require_once __DIR__ . '/../Models/generacodigo.php';
-require_once __DIR__ . '/../Models/envia_email.php';
+require_once dirname(__DIR__) . '/Config/def_ruta.php';
+require_once ROOT_PATH . '/Models/login_model.php';
+require_once ROOT_PATH . '/Models/generacodigo.php';
+require_once ROOT_PATH . '/Models/envia_email.php';
 
 function procesar_temp_registro($db, $correo, $clave) {
     $usuario = buscar_usuario_por_email($db, $correo); // Verificar si el usuario ya existe

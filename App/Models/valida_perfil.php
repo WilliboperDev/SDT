@@ -8,14 +8,15 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') { // Si no es una petición POST o in
     echo json_encode(['error' => 'Metodo no permitido']);
     exit;
 }
+require_once dirname(__DIR__) . '/Config/def_ruta.php';
 $user = $_SESSION['usuario'] ?? null; // Obtener el usuario de la sesión
 if (!isset($user) || empty($user)) {
-    header('Location: /SDT/');
+    header('Location: ' . $appUrl);
     exit;
 }
 // Configuración inicial
-require_once __DIR__ . '/../Config/conexion.php';
-require_once __DIR__ . '/../Controllers/perfil_controller.php';
+require_once ROOT_PATH . '/Config/conexion.php';
+require_once ROOT_PATH . '/Controllers/perfil_controller.php';
 
 // Verificar si la conexión a la base de datos está disponible
 if (!isset($database)) { 
@@ -91,7 +92,7 @@ try {
                 }
 
                 // Mover el archivo a una ubicación segura
-                $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/SDT/Public/img/avatars/' . $id_user . '/';
+                $uploadDir = ROOT_PATH2 . '/Public/img/avatars/' . $id_user . '/';
 
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0755, true); // Crear el directorio si no existe
@@ -109,13 +110,13 @@ try {
                 // Eliminar el avatar anterior del sistema de archivos
                 $archAv = busca_avatar($database, $user);
                 if ($archAv) {
-                    $filePath = $_SERVER['DOCUMENT_ROOT'] . $archAv;
+                    $filePath = ROOT_PATH2 . '/' . $archAv;
                     if (file_exists($filePath)) {
                         unlink($filePath); // Eliminar el archivo de imagen
                     }
                 }
                 // Ruta a guardar en BD
-                $urlcorta = '/SDT/Public/img/avatars/' . $id_user . '/' . $newFileName;
+                $urlcorta = 'Public/img/avatars/' . $id_user . '/' . $newFileName;
             
             } else {
                 $urlcorta = '';

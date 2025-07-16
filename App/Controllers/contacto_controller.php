@@ -1,6 +1,6 @@
 <?php
 // Logica de control para los contactos
-require_once __DIR__ . '/../Models/contacto_model.php';
+require_once ROOT_PATH . '/Models/contacto_model.php';
 
 function contactos_dashboard($db, $user) {
     //muestra todos los contactos que no estan siendo seguidos por el usuario

@@ -6,6 +6,6 @@ if (
     strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest'
 ) {
     // Destruye la sesion y redirige
-    require_once __DIR__ . '/../Models/logout.php';
+    require_once ROOT_PATH . '/Models/logout.php';
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 // Logica de control para cambio de clave
-require_once __DIR__ . '/../Models/cambio_clave_model.php';
+require_once ROOT_PATH . '/Models/cambio_clave_model.php';
 
 function obtener_clave_login($db, $user) {
     $cambio = obtener_clave($db, $user);

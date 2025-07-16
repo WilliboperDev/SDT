@@ -7,8 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(['error' => 'Metodo no permitido']);
     exit;
 }
-require_once __DIR__ . '/../Config/conexion.php';
-require_once __DIR__ . '/../Models/login_model.php';
+require_once dirname(__DIR__) . '/Config/def_ruta.php';
+require_once ROOT_PATH . '/Config/conexion.php';
+require_once ROOT_PATH . '/Models/login_model.php';
 
 if (!isset($database)) { // Si no hay conexión a la base de datos
     http_response_code(400);

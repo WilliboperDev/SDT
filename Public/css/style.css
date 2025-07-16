@@ -253,7 +253,8 @@ a:hover {
 ***************** ESTILOS DE REGISTRAR LOGIN *****************/
 
 .backfond {
-    background-image: url('/SDT/Public/img/soft-white.jpg');
+    /* Variable CSS que será sobrescrita por JS */
+    background-image: var(--dynamic-bg, url('../img/soft-white.jpg'));
     background-repeat: no-repeat;
     background-position: left;
     background-size: cover; /* Cubre todo el contenedor */
@@ -2007,7 +2008,9 @@ span { /*Span de errores */
     display: flex;
     width: 100%;
     height: 100vh;
-    background-image: url(/SDT/Public/img/soft-white.jpg);
+    /* Variable CSS que será sobrescrita por JS */
+    background-image: var(--dynamic-bg, url('../img/soft-white.jpg'));
+
     background-repeat: no-repeat;
     background-position: left;
     background-size: cover;

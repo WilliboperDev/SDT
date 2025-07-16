@@ -1,9 +1,11 @@
 <?php
 // Inicializar la sesión
 session_start();
+
+require_once dirname(__DIR__) . '/Config/def_ruta.php';
 // Si no es una petición POST o intenta acceder directamente
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { 
-    header('Location: /SDT/');
+    header('Location: ' . $appUrl);
     exit;
 }
 // Validar si hay un usuario en la sesión
@@ -14,8 +16,8 @@ if (!isset($user) || empty($user)) {
 }
 
 /////// Configuración inicial
-require_once __DIR__ . '/../Config/conexion.php';
-require_once __DIR__ . '/../Controllers/cambio_clave_controller.php';
+require_once ROOT_PATH . '/Config/conexion.php';
+require_once ROOT_PATH . '/Controllers/cambio_clave_controller.php';
 
 if (!isset($database)) { // Si no hay conexión a la base de datos
     echo json_encode(['success' => false, 'error' => 'No se puede acceder a los datos.']);

@@ -1,6 +1,6 @@
 <?php
 // Logica de control para los productos del usuario
-require_once __DIR__ . '/../Models/producto_model.php';
+require_once ROOT_PATH . '/Models/producto_model.php';
 
 function procesar_productos($db, $email) {
     $productos = obtener_productos($db, $email);

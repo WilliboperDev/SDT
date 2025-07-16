@@ -5,13 +5,14 @@ session_start();
 
 /* la variable superglobal ($_SERVER['REQUEST_URI']) muestra de la URL solo el nombre de carpeta y archivo 
    con explode, extrae de la variable superglobal el nombre del archivo en la posicion 2 utilizando el delimitador (/) */
+
 $url = explode("/", $_SERVER['REQUEST_URI'])[2];
 
 switch ($url) {
 
 case "dashboard":
     if(!isset($_SESSION['usuario'])){
-        header('Location: /SDT/');
+        header('Location: ' . $appUrl);
         exit();
     }
     // Configuración del tiempo máximo de inactividad (5 minutos)
@@ -23,7 +24,7 @@ case "dashboard":
         $sessionTTL = time() - $_SESSION["timeout"];
         if ($sessionTTL > $inactividad) {
             // Destruye la sesión y redirige
-            header('Location: /SDT/App/Models/logout.php');
+            header('Location: ' . $appUrl2 . '/Models/logout.php');
             exit();
         }
     }
@@ -33,7 +34,7 @@ case "dashboard":
     break;
 
 default:
-    header('Location: /SDT/');
+    header('Location: ' . $appUrl);
     exit;
 
     break;

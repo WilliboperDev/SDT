@@ -7,18 +7,35 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') { // Si no es una petición POST o in
     echo json_encode(['error' => 'Metodo no permitido']);
     exit;
 }
-require_once __DIR__ . '/../Config/conexion.php';
-require_once __DIR__ . '/../Models/generaclave.php';
-require_once __DIR__ . '/../Libs/autoload.php'; //Incluir el autoload de Composer
-require_once __DIR__ . '/../Controllers/login_controller.php';
+
+// Verificar si Composer está instalado
+require_once dirname(__DIR__) . '/Config/def_ruta.php';
+$autoloadPath = ROOT_PATH2 . '/vendor/autoload.php';
+if (!file_exists($autoloadPath)) {
+    throw new RuntimeException('Ejecuta composer install primero');
+}
+
+require_once ROOT_PATH . '/Config/conexion.php';
+require_once ROOT_PATH . '/Models/generaclave.php';
+require_once $autoloadPath; //Incluir el autoload de Composer
+require_once ROOT_PATH . '/Controllers/login_controller.php';
 
 // Carga el .env
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../Config/');
+$envDir = realpath(ROOT_PATH . '/Config/');
+if (!$envDir) throw new RuntimeException("Directorio .env no encontrado");
+
+$dotenv = Dotenv\Dotenv::createImmutable($envDir);
 $dotenv->load();
 $dotenv->required(['SMTP_US', 'SMTP_PA'])->notEmpty();
+
+// Definir variables en ámbito global
 $SMTP_US = $_ENV['SMTP_US'];
 $SMTP_PA = $_ENV['SMTP_PA'];
 
+// Verificar si las credenciales SMTP están definidas
+if (empty($SMTP_US) || empty($SMTP_PA)) {
+    throw new Exception('Credenciales SMTP no definidas.');
+}
 // Use de los espacios de nombres (namespaces) de PHPMailer
 // Los use se colocan en la parte superior del script de PHP
 // Estos son los use de las clases más importantes que puedes necesitar con PHPMailer
@@ -87,7 +104,7 @@ try { // Manejo de excepciones
     $mail->Subject = 'Aqui tienes el codigo de recuperación que has solicitado'; 
     $mail->Body = '<p>Hola, Bienvenido!<br>Utiliza el siguiente código temporal para iniciar sesión en tu cuenta de SDT.</p>
                 <p style="font-size: 25px;"><b>' . $claveale . '</b></p>
-                <p>una vez que ingrese al sistema, Actualice su contraseña de preferencia.</p>
+                <p>Una vez que ingrese al sistema, Actualice su contraseña de preferencia.</p>
                 <br> 
                 *******************************************************************************************************************************
                 <p>¿No has solicitado este código?<br>Si no eres el origen de esta solicitud puedes ignorar este mensaje.</p>

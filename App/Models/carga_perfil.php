@@ -1,6 +1,7 @@
 <?php
-require_once __DIR__ . '/../Config/conexion.php';
-require_once __DIR__ . '/../Controllers/perfil_controller.php';
+require_once dirname(__DIR__) . '/Config/def_ruta.php';
+require_once ROOT_PATH . '/Config/conexion.php';
+require_once ROOT_PATH . '/Controllers/perfil_controller.php';
 
 header('Content-Type: application/json');
 

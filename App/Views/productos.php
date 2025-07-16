@@ -1,8 +1,8 @@
 <?php 
 // bloqueo para evitar entrar directamente desde el navegador
-require_once __DIR__ . '/../Config/cabeceras.php';
+require_once dirname(__DIR__) . '/Config/def_ruta.php';
+require_once ROOT_PATH . '/Config/cabeceras.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,7 +10,7 @@ require_once __DIR__ . '/../Config/cabeceras.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slider de Productos</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/SDT/Public/css/style.css">
+    <link rel="stylesheet" href= "<?= htmlspecialchars($appUrl, ENT_QUOTES) ?>/Public/css/style.css">
 </head>
 <body>
     <div class="container">

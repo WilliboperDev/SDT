@@ -3,6 +3,16 @@
 ///////////////////////////////////////////////////////////////////////////
 //////////////////////// LOGIN ///////////////////////////////////////////
 
+// Definir la URL base del proyecto
+const PROJECT_FOLDER = window.location.pathname.split('/')[1] || '';
+const BASE_URL = `/${PROJECT_FOLDER}/`;
+
+// Inyecta la ruta dinámica para el estilo de fondo
+document.documentElement.style.setProperty(
+  '--dynamic-bg', 
+  `url('${window.location.pathname.split('/')[1] ? '/' + window.location.pathname.split('/')[1] + '/' : '/'}Public/img/soft-white.jpg')`
+);
+
 document.addEventListener('DOMContentLoaded', function() {
     const formulario = document.getElementById('formuInd');
     const errorDiv = document.getElementById('errorDiv');
@@ -63,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     clave: clave
                 };
                 // Enviar los datos al servidor para registrar el usuario
-                fetch('/SDT/App/Models/login.php', {
+                fetch(`${BASE_URL}App/Models/login.php`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -81,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         formulario.reset(); // Limpiar el formulario
                         // Redirijo al dashboard
-                        window.location.href = "/SDT/dashboard";
+                        window.location.href = `${BASE_URL}dashboard`;
                         
                     } else {
                         // Ocultar el overlay y el loader después de procesar
@@ -178,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             setTimeout(function() { // Simular el procesamiento de datos
                 // Enviar los datos al servidor para registrar el usuario
-                fetch('/SDT/App/Models/mensaje.php', {
+                fetch(`${BASE_URL}App/Models/mensaje.php`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -239,6 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
 ///////////////////////////////////////////////////////////////////////////
 //////////////////////// REGISTRAR LOGIN //////////////////////////////////
 
@@ -315,7 +326,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     clave2: clave2
                 };
                 // Enviar los datos al servidor para registrar el usuario
-                fetch('/SDT/App/Models/valida_registro.php', {
+                fetch(`${BASE_URL}App/Models/valida_registro.php`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -338,7 +349,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         formulario.reset(); // Limpiar el formulario
 
                         // Redirijo pasando ID con una URL amigable
-                        window.location.href = "/SDT/verificar/" + id; 
+                        window.location.href = `${BASE_URL}verificar/`+ id; 
                         
                     } else {
                         // Ocultar el overlay y el loader después de procesar
@@ -532,7 +543,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 errorDiv2.style.display = 'none';
             }
         
-            fetch('/SDT/App/Models/valida_token.php',{
+            fetch(`${BASE_URL}App/Models/valida_token.php`,{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -582,7 +593,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         closeBtn.addEventListener('click', function () {
                             modal.style.display = 'none';
                             // Redirijo al index
-                            window.location.href = "/SDT/";
+                            window.location.href = `${BASE_URL}`;
                         });
                     },2000);
 
@@ -594,7 +605,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.error(data.error); // Mostrar error
                     if (data.error == 'Token no verificado') {
                         loader_redi('for-cod');
-                        window.location.href = "/SDT/";
+                        window.location.href = `${BASE_URL}`;
                     }
                 }
             })
@@ -617,7 +628,7 @@ function iniciarContador() {
     const data = {
         codigo: codetok.value
     };
-    fetch('/SDT/App/Models/iniciar_contador.php', {
+    fetch(`${BASE_URL}App/Models/iniciar_contador.php`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -640,7 +651,7 @@ function iniciarContador() {
                         contadorElement.textContent = "Tiempo agotado, redireccionando....";
                         //mensajeElement.textContent = "El código ha expirado. Ya no es válido.";
                         contadorActivo = false; // Detener el contador
-                        fetch('/SDT/App/Models/borra_token.php', {
+                        fetch(`${BASE_URL}App/Models/borra_token.php`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -651,7 +662,7 @@ function iniciarContador() {
                         .then(data => {
                             if (data.success) { 
                                 loader_redi('for-cod');
-                                window.location.href = "/SDT/"; 
+                                window.location.href = `${BASE_URL}`; 
                             } 
                         });        
                     }
@@ -683,7 +694,7 @@ function verificarContador(code) {
     };
     const contadorElement = document.getElementById('contador');
 
-    fetch('/SDT/App/Models/verificar_contador.php', {
+    fetch(`${BASE_URL}App/Models/verificar_contador.php`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -694,7 +705,7 @@ function verificarContador(code) {
     .then(data => {
       if (data.success) {
         // Mostrar mensaje o redirigir
-        window.location.href = "/SDT/";
+        window.location.href = `${BASE_URL}`;
       } else {
         if (data.tiempoTranscurrido) {
             // Retomar el contador con el tiempo transcurrido
@@ -711,7 +722,7 @@ function verificarContador(code) {
                     if (contadorActivo) {
                         contadorElement.textContent = "Tiempo agotado, redireccionando....";
                         contadorActivo = false; // Detener el contador
-                        fetch('/SDT/App/Models/borra_token.php', {
+                        fetch(`${BASE_URL}App/Models/borra_token.php`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -722,7 +733,7 @@ function verificarContador(code) {
                         .then(data => {
                             if (data.success) {
                                 loader_redi('for-cod');
-                                window.location.href = "/SDT/";
+                                window.location.href = `${BASE_URL}`;
                             }
                         })  
                     }
@@ -785,7 +796,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('overlay').style.display = 'none';
                 document.getElementById('loader').style.display = 'none';
             
-                window.location.href = '/SDT/App/Models/logout.php';
+                window.location.href = `${BASE_URL}App/Models/logout.php`;
             },3000);
         });
     }
@@ -831,7 +842,7 @@ function generateContactCards() {
     const nextBtn = document.querySelector('.next');
     const select = document.getElementById('categoriaSelect');
 
-    fetch('/SDT/App/Models/valida_contacto.php', {    
+    fetch(`${BASE_URL}App/Models/valida_contacto.php`, {    
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
@@ -956,14 +967,14 @@ document.addEventListener('DOMContentLoaded', function() {
             if (buttonText === 'Inicio') {
 
                 //mainContent.style.display = 'block'; // Mostrar el contenido principal
-                window.location.href = "/SDT/dashboard";
+                window.location.href = `${BASE_URL}dashboard`;
             
             } else if (buttonText === 'Contactos') {
 
                 // Limpiar el contenido actual del main-content
                 mainContent.innerHTML = '';
 
-                fetch ('/SDT/App/Views/contactos.php', {
+                fetch (`${BASE_URL}App/Views/contactos.php`, {
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest' // para el navegador
                     }
@@ -989,8 +1000,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 mainContent.innerHTML = '';
 
                 // Enviar la solicitud para establecer el acceso a productos
-                //fetch ('/SDT/App/Views/productos.php')
-                fetch('/SDT/App/Views/productos.php', {
+                fetch(`${BASE_URL}App/Views/productos.php`, {
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest' // para el navegador
                     }
@@ -1015,7 +1025,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Limpiar el contenido actual del main-content
                 mainContent.innerHTML = '';
 
-                fetch ('/SDT/App/Views/actualiza_clave.php', {
+                fetch (`${BASE_URL}App/Views/actualiza_clave.php`, {
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest' // para el navegador
                     }
@@ -1060,7 +1070,7 @@ document.addEventListener('DOMContentLoaded', function() {
             mainContent.innerHTML = '';
 
             // Realizar una solicitud al archivo PHP externo
-            fetch('/SDT/App/Views/perfil.php', {
+            fetch(`${BASE_URL}App/Views/perfil.php`, {
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest' // para el navegador
                 }
@@ -1085,7 +1095,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (cancelButton) {
                     cancelButton.addEventListener('click', function() {
                         // Redirijo al dashboard
-                        window.location.href = "/SDT/dashboard";
+                        window.location.href = `${BASE_URL}dashboard`;
                     });
                 }
             })
@@ -1106,7 +1116,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentState = seguirBtn.getAttribute('data-state');
         const newState = currentState === 'follow' ? 'following' : 'follow';
         
-        fetch('/SDT/App/Models/valida_contacto.php', {
+        fetch(`${BASE_URL}App/Models/valida_contacto.php`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -1213,7 +1223,7 @@ function AbrirModalAvatar() {
 
 // Cargar las categorias al cargar la página
 function cargarCategorias(categoriaUsuarioId, esEdicion) {
-    fetch('/SDT/App/Models/carga_perfil.php', {
+    fetch(`${BASE_URL}App/Models/carga_perfil.php`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({accion: 'categoria'})
@@ -1261,7 +1271,7 @@ function cargarCategorias(categoriaUsuarioId, esEdicion) {
 
 // Cargar codigos de area al cargar la página
 function cargarCodigos(extensionUsuarioId) {
-    fetch('/SDT/App/Models/carga_perfil.php', {
+    fetch(`${BASE_URL}App/Models/carga_perfil.php`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({accion: 'codarea'})
@@ -1294,7 +1304,7 @@ function cargarCodigos(extensionUsuarioId) {
 
 // Cargar los estados al cargar la página
 function cargarEstadosYSeleccionar(estadoUsuarioId) {
-    fetch('/SDT/App/Models/carga_perfil.php', {
+    fetch(`${BASE_URL}App/Models/carga_perfil.php`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({accion: 'estados'})
@@ -1328,7 +1338,7 @@ function cargarEstadosYSeleccionar(estadoUsuarioId) {
 
 // Cargar los municipios al seleccionar un estado
 function cargarMunicipiosYSeleccionar(estadoId, municipioId) {
-    fetch('/SDT/App/Models/carga_perfil.php', {
+    fetch(`${BASE_URL}App/Models/carga_perfil.php`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ estado_id: estadoId, accion: 'municipios'})
@@ -1362,7 +1372,7 @@ function cargarMunicipiosYSeleccionar(estadoId, municipioId) {
 
 // Cargar las parroquias al seleccionar un municipio
 function cargarParroquiasYSeleccionar(municipioId, parroquiaId) {
-    fetch('/SDT/App/Models/carga_perfil.php', {
+    fetch(`${BASE_URL}App/Models/carga_perfil.php`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ municipio_id: municipioId, accion: 'parroquias'})
@@ -1395,7 +1405,7 @@ function cargarParroquiasYSeleccionar(municipioId, parroquiaId) {
 
 // Cargar horarios al cargar la página  
 function cargarHorarios(horarioAperturaUsuarioId, horarioCierreUsuarioId) {
-    fetch('/SDT/App/Models/carga_perfil.php', {
+    fetch(`${BASE_URL}App/Models/carga_perfil.php`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ accion: 'horarios'})
@@ -1451,7 +1461,7 @@ function cargarPerfilDinamico(esEdicion) {
     const formData = new FormData();
     formData.append('ind', 'consultaPerfil');
     // Hacer la solicitud al servidor para obtener los datos del perfil
-    fetch('/SDT/App/Models/valida_perfil.php', {
+    fetch(`${BASE_URL}App/Models/valida_perfil.php`, {
         method: 'POST',
         body: formData
     })
@@ -1715,7 +1725,7 @@ function inicializarPantallaPerfil() {
             /****************************************************************/
 
             setTimeout(function() { // Simular el procesamiento de datos
-            fetch('/SDT/App/Models/valida_perfil.php', {
+            fetch(`${BASE_URL}App/Models/valida_perfil.php`, {
                 method: 'POST',
                 body: formData, // Enviar el FormData con los datos del formulario
             })
@@ -1736,7 +1746,7 @@ function inicializarPantallaPerfil() {
                 if (data.success) {
                     if (data.message === 'No hay cambios') {
                         // Redirijo al dashboard directamente
-                        window.location.href = "/SDT/dashboard";
+                        window.location.href = `${BASE_URL}dashboard`;
                     } else {
                         // Mostrar el modal
                         const modal = document.getElementById('successModal');
@@ -1747,7 +1757,7 @@ function inicializarPantallaPerfil() {
                         closeBtn.addEventListener('click', function () {
                             modal.style.display = 'none';
                             // Redirijo al dashboard
-                            window.location.href = "/SDT/dashboard";
+                            window.location.href = `${BASE_URL}dashboard`;
                         });
 
                         // Cerrar el modal al hacer clic fuera del contenido
@@ -1755,7 +1765,7 @@ function inicializarPantallaPerfil() {
                             if (event.target === modal) {
                                 modal.style.display = 'none';
                                 // Redirijo al dashboard
-                                window.location.href = "/SDT/dashboard";
+                                window.location.href = `${BASE_URL}dashboard`;
                             }
                         });
                     }
@@ -1841,7 +1851,7 @@ function inicializarPantallaPerfil() {
             perfilVari.municipio.innerHTML = '<option value="" disabled selected>Selecciona el municipio</option>';
             return;
         }
-        fetch('/SDT/App/Models/carga_perfil.php', {
+        fetch(`${BASE_URL}App/Models/carga_perfil.php`, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'
@@ -1877,7 +1887,7 @@ function inicializarPantallaPerfil() {
             perfilVari.parroquia.innerHTML = '<option value="" disabled selected>Selecciona la parroquia</option>';
             return;
         }
-        fetch('/SDT/App/Models/carga_perfil.php', {
+        fetch(`${BASE_URL}App/Models/carga_perfil.php`, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'
@@ -2062,7 +2072,7 @@ function iniciarPantallaContactos() {
                 const currentState = button.getAttribute('data-state');
                 const newState = currentState === 'follow' ? 'following' : 'follow';
 
-                fetch('/SDT/App/Models/valida_contacto.php', {
+                fetch(`${BASE_URL}App/Models/valida_contacto.php`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -2088,7 +2098,7 @@ function iniciarPantallaContactos() {
     // Cargar los productos en el slide dentro del modal
     async function cargarProductos(email, container) {
         try {
-            const response = await fetch('/SDT/App/Models/valida_producto.php', {
+            const response = await fetch(`${BASE_URL}App/Models/valida_producto.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -2210,7 +2220,7 @@ function iniciarPantallaContactos() {
     // Función para cargar seguidores dinámicamente
     async function cargarSeguidores() {
         try {
-            const response = await fetch('/SDT/App/Models/valida_contacto.php', {
+            const response = await fetch(`${BASE_URL}App/Models/valida_contacto.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -2272,7 +2282,7 @@ function iniciarPantallaContactos() {
     // Función para cargar seguidos dinámicamente
     async function cargarSeguidos() {
         try {
-            const response = await fetch('/SDT/App/Models/valida_contacto.php', {
+            const response = await fetch(`${BASE_URL}App/Models/valida_contacto.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -2344,7 +2354,7 @@ function iniciarPantallaProductos() {
     // Función para cargar los productos desde el servidor
     async function CargarProductos(email) {
         try {
-            const response = await fetch('/SDT/App/Models/valida_producto.php', {
+            const response = await fetch(`${BASE_URL}App/Models/valida_producto.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -2575,7 +2585,7 @@ function iniciarPantallaProductos() {
             }
 
             // Eliminar el producto del servidor
-            fetch('/SDT/App/Models/valida_producto.php', {
+            fetch(`${BASE_URL}App/Models/valida_producto.php`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ action: 'elimina_producto', id: product.id })
@@ -2611,7 +2621,7 @@ function iniciarPantallaProductos() {
         formData.append('action', 'inserta_producto');
 
         try {    
-            const response = await fetch('/SDT/App/Models/valida_producto.php', {
+            const response = await fetch(`${BASE_URL}App/Models/valida_producto.php`, {
                 method: 'POST',
                 body: formData
             });
@@ -2887,12 +2897,12 @@ function iniciarPantallaActualizarClave() {
                 document.getElementById('overlay').style.display = 'none';
                 document.getElementById('loader').style.display = 'none';
             
-                window.location.href = '/SDT/dashboard';
+                window.location.href = `${BASE_URL}dashboard`;
             },3000);
 
             // Enviar el formulario
             const formData = new FormData(formuAct);
-            fetch('/SDT/App/Models/valida_cambio_clave.php', {
+            fetch(`${BASE_URL}App/Models/valida_cambio_clave.php`, {
                 method: 'POST',
                 body: formData
             })

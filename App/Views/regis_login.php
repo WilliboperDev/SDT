@@ -1,10 +1,13 @@
+<?php
+require_once dirname(__DIR__) . '/Config/def_ruta.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de usuario</title>
-    <link rel="stylesheet" href="/SDT/Public/css/style.css">
+    <link rel="stylesheet" href= "<?= htmlspecialchars($appUrl, ENT_QUOTES) ?>/Public/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="backfond">
@@ -37,7 +40,7 @@
                 
                 <div>
                     <button type="submit"><i class="fas fa-paper-plane"></i></button>
-                    <a href="/SDT/"><button type="button"><i class="fa-solid fa-house"></i></button></a>
+                    <a href="<?= htmlspecialchars($appUrl, ENT_QUOTES) ?>" aria-label="Inicio"><button type="button"><i class="fa-solid fa-house"></i></button></a>
                 </div>
             </form>
         </div>
@@ -50,6 +53,6 @@
     </div> 
 
     <!-- JavaScript Libraries -->
-    <script src="/SDT/Public/js/validar.js"></script>
+    <script src="<?= htmlspecialchars($appUrl, ENT_QUOTES) ?>/Public/js/validar.js"></script>
 </body>
 </html>

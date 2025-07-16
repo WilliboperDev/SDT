@@ -8,22 +8,24 @@
 Options All -Indexes
 
 # Reglas de reescritura 
-<ifModule mod_rewrite.c>    
-    RewriteEngine on
-
-    # Reescribir /SDT/archivo a /App/Views/archivo.php
-    RewriteRule ^([a-zA-Z0-9_-]+)$ App/Views/$1.php [L]
+<IfModule mod_rewrite.c>    
+    RewriteEngine On
 
     # Manejar solicitudes de archivos PHP en app/views
+    # 1. Atajo rápido para URLs simples
+    RewriteRule ^([a-zA-Z0-9_-]+)$ App/Views/$1.php [L]
+
+    # 2. Con condiciones para evitar conflictos con archivos y directorios existentes
     RewriteCond %{REQUEST_FILENAME} !-d 
-    RewriteCond %{DOCUMENT_ROOT}/SDT/App/Views/$1.php -f
-    RewriteRule ^(.*)$ App/Views/$1.php [L,QSA]
+    RewriteCond %{REQUEST_FILENAME} !-f 
+    RewriteCond %{DOCUMENT_ROOT}/App/Views/$1.php -f
+    RewriteRule ^([^/]+)/?$ App/Views/$1.php [L]
 
     # Agrega a cod_verif una variable GET oculta en la reescritura 
-    RewriteRule ^verificar/([0-9]+)$ App/Views/cod_verif.php?id=$1&from_rewrite=1 [L]
+    RewriteRule ^verificar/([0-9]+)$ App/Views/cod_verif.php?id=$1&from_rewrite=1 [L,QSA]
 
     # Evitar acceder a cod_verif.php con letras en el parámetro id 
-    RewriteCond %{QUERY_STRING} !^[0-9]+$ [NC]
+    RewriteCond %{QUERY_STRING} !(^|&)id=[0-9]+(&|$) [NC]
     RewriteRule ^App/Views/cod_verif.php?id=$1$ index.php [L]
 
     # Si no es un archivo o directorio existente, redirige a index.php
@@ -31,12 +33,29 @@ Options All -Indexes
     #RewriteCond %{REQUEST_FILENAME} !-d
     #RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 
-</ifModule> 
+    # regla 404 personalizada:
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule .* error404.php [L]
 
+</IfModule> 
+
+#### Seguridad:
 # Página 404 personalizada
-ErrorDocument 404 /SDT/error404.php
+<Files "error404.php">
+    ErrorDocument 404 /error404.php
+</Files>
 
-# Asegurando el archivo htaccess que no accedan en el navegador
+# NO accedan en el navegador
 <Files ".htaccess">
     Require all denied
 </Files>
+
+# Bloquea el acceso vía HTTP
+<FilesMatch "\.(env|log|sql)$">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "^(policia|cabeceras|conexion|def_ruta)\.php$">
+    Require all denied
+</FilesMatch>

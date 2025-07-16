@@ -7,8 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') { // Si no es una petición POST o in
     echo json_encode(['error' => 'Metodo no permitido']);
     exit;
 }
-require_once __DIR__ . '/../Controllers/registro_controller.php';
-require_once __DIR__ . '/../Config/conexion.php';
+require_once dirname(__DIR__) . '/Config/def_ruta.php';
+require_once ROOT_PATH . '/Controllers/registro_controller.php';
+require_once ROOT_PATH . '/Config/conexion.php';
 
 if (!isset($database)) { // Si no hay conexión a la base de datos
     echo json_encode(['success' => false, 'error' => 'No se puede acceder a los datos.']);

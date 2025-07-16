@@ -6,7 +6,7 @@
  */
 
 // Verificar si Composer está instalado
-$autoloadPath = __DIR__ . '/../Libs/autoload.php';
+$autoloadPath = ROOT_PATH2 . '/vendor/autoload.php';
 if (!file_exists($autoloadPath)) {
     throw new RuntimeException('Ejecuta composer install primero');
 }
@@ -15,11 +15,21 @@ if (!file_exists($autoloadPath)) {
 require_once $autoloadPath;
 // 2. Configuraciones específicas de la aplicación
 // Carga el .env
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../Config/');
+$envDir = realpath(ROOT_PATH . '/Config/');
+if (!$envDir) throw new RuntimeException("Directorio .env no encontrado");
+
+$dotenv = Dotenv\Dotenv::createImmutable($envDir);
 $dotenv->load();
 $dotenv->required(['SMTP_US', 'SMTP_PA'])->notEmpty();
+
+// Definir variables en ámbito global
 $SMTP_US = $_ENV['SMTP_US'];
 $SMTP_PA = $_ENV['SMTP_PA'];
+
+// Verificar si las credenciales SMTP están definidas
+if (empty($SMTP_US) || empty($SMTP_PA)) {
+    throw new Exception('Credenciales SMTP no definidas.');
+}
 
 // 3. Importaciones de namespaces (orden alfabético recomendado)
 use PHPMailer\PHPMailer\Exception;
@@ -30,12 +40,6 @@ function enviarCorreo($username, $codv) {
     // Instancia de la clase PHPMailer
     $mail = new PHPMailer(true); // Pasar `true` para habilitar excepciones
     
-    global $SMTP_US, $SMTP_PA; // Importar las credenciales SMTP desde el archivo de configuración
-    // Verificar si las credenciales SMTP están definidas
-    if (empty($SMTP_US) || empty($SMTP_PA)) {
-        throw new Exception('Credenciales SMTP no definidas.');
-    }
-
     try { 
         // Configuración del servidor 
         $mail->SMTPDebug = 0; 
@@ -43,13 +47,13 @@ function enviarCorreo($username, $codv) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com'; // Especifica el servidor SMTP 
         $mail->SMTPAuth = true; 
-        $mail->Username = $SMTP_US; // Tu usuario SMTP 
-        $mail->Password = $SMTP_PA; // Tu contraseña SMTP
+        $mail->Username = $GLOBALS['SMTP_US']; // Tu usuario SMTP 
+        $mail->Password = $GLOBALS['SMTP_PA']; // Tu contraseña SMTP
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
         // Remitente y destinatarios 
-        $mail->setFrom($SMTP_US, 'Soporte_SDT'); 
+        $mail->setFrom($GLOBALS['SMTP_US'], 'Soporte_SDT'); 
         $mail->addAddress($username); 
 
         // Contenido del correo 

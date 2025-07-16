@@ -1,25 +1,15 @@
 <?php
-// Validar y sanitizar el código recibido por GET
-/*if (!isset($_GET['id']) || empty($_GET['id'])) {
-    // Destruye la sesion y redirige
-    require_once __DIR__ . '/../Models/logout.php';
-} else {
-    $codigo = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]]);
-    if ($codigo === false) {
-        // Destruye la sesion y redirige
-        require_once __DIR__ . '/../Models/logout.php';
-    }
-}*/
+require_once dirname(__DIR__) . '/Config/def_ruta.php';
 // Valida la variable del htaccess para permitir solo el acceso desde la URL amigable
 if (!isset($_GET['from_rewrite']) || $_GET['from_rewrite'] != 1) {
     http_response_code(403);
     // Destruye la sesion y redirige
-    require_once __DIR__ . '/../Models/logout.php';
+    require_once ROOT_PATH . '/Models/logout.php';
 }
 $codigo = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]]);
     if ($codigo === false) {
         // Destruye la sesion y redirige
-        require_once __DIR__ . '/../Models/logout.php';
+        require_once ROOT_PATH . '/Models/logout.php';
     }
 ?>
 <!DOCTYPE html>
@@ -28,7 +18,7 @@ $codigo = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT, ["options" => ["min
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Codigo de verificacion</title>
-    <link rel="stylesheet" href="/SDT/Public/css/style.css">
+    <link rel="stylesheet" href= "<?= htmlspecialchars($appUrl, ENT_QUOTES) ?>/Public/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body id="cod-verif-page" class="backfond">
@@ -71,6 +61,6 @@ $codigo = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT, ["options" => ["min
     </div>
     
     <!-- JavaScript Libraries -->
-    <script src="/SDT/Public/js/validar.js"></script>
+    <script src="<?= htmlspecialchars($appUrl, ENT_QUOTES) ?>/Public/js/validar.js"></script>
 </body>
 </html>

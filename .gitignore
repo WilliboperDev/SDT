@@ -1,6 +1,4 @@
 # Archivos y carpetas a ignorar
-/App/Libs/
 /App/Config/.env
 /.vscode/
-*.json
-*.lock
+/vendor/

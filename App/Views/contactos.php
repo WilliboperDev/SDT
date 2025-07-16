@@ -1,6 +1,7 @@
 <?php 
 // bloqueo para evitar entrar directamente desde el navegador
-require_once __DIR__ . '/../Config/cabeceras.php';
+require_once dirname(__DIR__) . '/Config/def_ruta.php';
+require_once ROOT_PATH . '/Config/cabeceras.php';
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +10,7 @@ require_once __DIR__ . '/../Config/cabeceras.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seguidores y Seguidos</title>
-    <link rel="stylesheet" href="/SDT/Public/css/style.css">
+    <link rel="stylesheet" href= "<?= htmlspecialchars($appUrl, ENT_QUOTES) ?>/Public/css/style.css">
 </head>
 <body>
     <div style="width: 90%; height: 80%;">

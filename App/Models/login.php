@@ -14,8 +14,9 @@ header("X-Content-Type-Options: nosniff");
 header("Content-Security-Policy: default-src 'self'"); 
 header("Referrer-Policy: no-referrer-when-downgrade");
 
-require_once __DIR__ . '/../Config/conexion.php';
-require_once __DIR__ . '/../Controllers/login_controller.php';
+require_once dirname(__DIR__) . '/Config/def_ruta.php';
+require_once ROOT_PATH . '/Config/conexion.php';
+require_once ROOT_PATH . '/Controllers/login_controller.php';
 
 if (!isset($database)) { // Si no hay conexión a la base de datos
     exit(json_encode(['success' => false, 'error' => 'No se puede acceder a los datos.']));

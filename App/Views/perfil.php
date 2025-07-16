@@ -1,6 +1,7 @@
 <?php 
 // bloqueo para evitar entrar directamente desde el navegador
-require_once __DIR__ . '/../Config/cabeceras.php';
+require_once dirname(__DIR__) . '/Config/def_ruta.php';
+require_once ROOT_PATH . '/Config/cabeceras.php';
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +10,7 @@ require_once __DIR__ . '/../Config/cabeceras.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Perfil</title>
-    <link rel="stylesheet" href="/SDT/Public/css/style.css">
+    <link rel="stylesheet" href= "<?= htmlspecialchars($appUrl, ENT_QUOTES) ?>/Public/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body> 
@@ -18,7 +19,7 @@ require_once __DIR__ . '/../Config/cabeceras.php';
     <div class="edit-avatar">
       <!-- Imagen del avatar -->
       <!--<img class="pre-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="avatar" id="avatar-preview">-->
-      <img class="pre-avatar" src="Public/img/usuario.png" alt="avatar" id="avatar-preview">
+      <img class="pre-avatar" src="<?= htmlspecialchars($appUrl, ENT_QUOTES) ?>/Public/img/usuario.png" alt="avatar" id="avatar-preview">
       <input type="file" id="edit-avatar" name="avatar" accept="image/*" style="display: none;">
       <button type="button" id="change-avatar" class="change-avatar-btn" aria-label="Cambiar imagen"><i class="fa-solid fa-camera"></i></button>
     </div>

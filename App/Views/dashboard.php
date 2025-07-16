@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/../Config/policia.php';
+require_once dirname(__DIR__) . '/Config/def_ruta.php';
+require_once ROOT_PATH . '/Config/policia.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -7,7 +8,7 @@ require_once __DIR__ . '/../Config/policia.php';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Principal</title>
-  <link rel="stylesheet" href="/SDT/Public/css/style.css">
+  <link rel="stylesheet" href= "<?= htmlspecialchars($appUrl, ENT_QUOTES) ?>/Public/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">    
 </head>
 <body>
@@ -96,6 +97,7 @@ require_once __DIR__ . '/../Config/policia.php';
   </div> <!-- Loader -->  
   
   <!-- Cargar scripts -->
-  <script src="/SDT/Public/js/validar.js"></script>
+  <script src="<?= htmlspecialchars($appUrl, ENT_QUOTES) ?>/Public/js/validar.js"></script>
+  
 </body>
 </html>

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de directorio telefónico</title>
-    <link rel="icon" type="image/png" href="/SDT/Public/img/favicon.png">
-    <link rel="stylesheet" href="/SDT/Public/css/style.css">
+    <link rel="icon" type="image/png" href="Public/img/favicon.png">
+    <link rel="stylesheet" href= "Public/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="backfond">
@@ -30,10 +30,10 @@
                 
                 <div class="input-box">
                     <button type="submit" id="submitBtn">Acceder</button>
-                    <p><a href="/SDT/recupera">Olvidé mi contraseña</a></p>
+                    <p><a href="recupera">Olvidé mi contraseña</a></p>
 
                     <p class="tit-regis">¿Aún no tienes una cuenta?</p>
-                    <a href="/SDT/regis_login">
+                    <a href="regis_login">
                         <button type="button"
                             style="background-color: #247228;"
                             onmouseover="this.style.backgroundColor='#328d36'"
@@ -71,6 +71,6 @@
             }, 1300);
         });
     </script>
-    <script src="/SDT/Public/js/validar.js"></script>
+    <script src="Public/js/validar.js"></script>
 </body>
 </html>
