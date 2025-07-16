@@ -10,8 +10,8 @@ Aplicación web para gestionar y buscar contactos fácilmente.
 
 ## Instalación rápida
 1. Clona o copia el proyecto en tu servidor local (XAMPP, WAMP, etc.)
-2. Importa la base de datos desde la carpeta `/App/config/BD.sql`
-3. Configura el SMTP y servidor BD en `/App/Config/.env.example` (_Luego quitar el .example_)
+2. Importa la base de datos desde la carpeta `App/config/BD.sql`
+3. Configura el SMTP y servidor BD en `App/Config/.env.example` (_Luego quitar el .example_)
 
 ## 📦 Dependencias / Librerías usadas
 1. Composer install:
