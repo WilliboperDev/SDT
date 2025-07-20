@@ -23,4 +23,4 @@ Aplicación web para gestionar y buscar contactos fácilmente.
 > _Asegúrate de instalar o incluir las librerías necesarias antes de ejecutar la aplicación._
 
 ---
-Desarrollado por Williboper Dev
+Desarrollado por Williboper Dev.
