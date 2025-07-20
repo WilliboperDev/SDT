@@ -1,5 +1,5 @@
 <?php
-session_start(); 
+session_start();
 http_response_code(404); // Obligatorio para SEO
 
 require_once __DIR__ . '/App/Config/def_ruta.php';
