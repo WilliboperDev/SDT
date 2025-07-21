@@ -29,9 +29,11 @@ Para activarlo:
 3. Si no lo necesitas, borra `.github/workflows/sonarcloud.yml` y `sonar-project.properties`.
 
 
+
 > [!IMPORTANT]
 > _Asegúrate de instalar o incluir las librerías necesarias antes de ejecutar la aplicación._
 
 ---
 📄 Licencia
+
 MIT License © 2025 Williboper Dev
