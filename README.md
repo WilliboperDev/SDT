@@ -19,6 +19,9 @@ Aplicación web para gestión de contactos con autenticación de usuarios.
 3. [PHPMailer] — Envio de correo.
 4. [vlucas/phpdotenv] — Gestión de variables de entorno.
 
+> [!IMPORTANT]
+> _Asegúrate de instalar o incluir las librerías necesarias antes de ejecutar la aplicación._
+
 ## 🔍 Análisis con SonarCloud (Opcional)
 Para activarlo:
 1. Crea un proyecto en [SonarCloud](https://sonarcloud.io).
@@ -33,14 +36,14 @@ Para activarlo:
 App/
 
 ├── Config/       # Configuraciones
+
 ├── Controllers/  # Lógica de aplicación
+
 ├── Models/       # Acceso a datos
+
 ├── Views/        # Plantillas
+
 ├── Public/       # Assets públicos
-
-
-> [!IMPORTANT]
-> _Asegúrate de instalar o incluir las librerías necesarias antes de ejecutar la aplicación._
 
 ---
 📄 Licencia
