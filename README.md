@@ -28,7 +28,7 @@ Para activarlo:
    - `SONAR_ORG` (nombre de tu organización).
 3. Si no lo necesitas, borra `.github/workflows/sonarcloud.yml` y `sonar-project.properties`.
 
-🛠️ Estructura de directorios
+## 🛠️ Estructura de directorios
 
 App/
 ├── Config/       # Configuraciones
