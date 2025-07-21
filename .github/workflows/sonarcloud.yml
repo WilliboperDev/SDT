@@ -60,6 +60,4 @@ jobs:
           SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}  # Definida en GitHub
           SONAR_ORG: ${{ secrets.SONAR_ORG }}
         with:
-          args: >
-            -Dsonar.projectKey=${SONAR_PROJECT_KEY}
-            -Dsonar.organization=${SONAR_ORG}
+          args: -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} -Dsonar.organization=${{ secrets.SONAR_ORG }}
