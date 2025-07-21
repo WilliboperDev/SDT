@@ -19,6 +19,14 @@ Aplicación web para gestionar y buscar contactos fácilmente.
 3. Libreria [Phpmailer] — Envio de correo.
 4. Libreria [phpdotenv] — variables de entorno.
 
+## Análisis con SonarCloud (Opcional)
+Para activarlo:
+1. Crea un proyecto en [SonarCloud](https://sonarcloud.io).
+2. Configura estos secrets en GitHub:
+   - `SONAR_TOKEN` (token de SonarCloud).
+   - `SONAR_PROJECT_KEY` (ej: `TuUsuario_MiProyecto`).
+   - `SONAR_ORG` (nombre de tu organización).
+
 > [!IMPORTANT]
 > _Asegúrate de instalar o incluir las librerías necesarias antes de ejecutar la aplicación._
 
