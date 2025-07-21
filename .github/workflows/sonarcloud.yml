@@ -34,12 +34,14 @@ on:
     paths-ignore:  # 👈 Ignora cambios en estos paths (no activará el workflow)
       - 'README.md' # Ignora modificaciones al README
       - '**.env'        # Ignora archivos .env (variables de entorno)
+      - 'sonar-project.properties'  # Opcional: ignora modificaciones a este archivo
   pull_request:
     branches: [ "main" ]
     types: [opened, synchronize, reopened]
     paths-ignore:  # 👈 También aplica para PRs
       - 'README.md'
       - '**.env'
+      - 'sonar-project.properties'
   workflow_dispatch:
 
 permissions:
@@ -54,6 +56,7 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: SonarQube Scan
+        if: ${{ secrets.SONAR_TOKEN }}  # Solo ejecuta si el token existe 👈
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
