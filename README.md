@@ -14,7 +14,7 @@ Aplicación web para gestión de contactos con autenticación de usuarios.
 3. Configura el SMTP y servidor BD en `/App/Config/.env.example` (_Luego quitar el .example_).
 
 ## 📦 Dependencias / Librerías usadas
-1. Instalar con Composer install:
+1. Instalar con `Composer install`:
 2. [Medoo] — Micro ORM para PHP.
 3. [PHPMailer] — Envio de correo.
 4. [vlucas/phpdotenv] — Gestión de variables de entorno.
@@ -27,6 +27,14 @@ Para activarlo:
    - `SONAR_PROJECT_KEY` (ej: `TuUsuario_MiProyecto`).
    - `SONAR_ORG` (nombre de tu organización).
 3. Si no lo necesitas, borra `.github/workflows/sonarcloud.yml` y `sonar-project.properties`.
+
+🛠️ Estructura de directorios
+App/
+├── Config/       # Configuraciones
+├── Controllers/  # Lógica de aplicación
+├── Models/       # Acceso a datos
+├── Views/        # Plantillas
+├── Public/       # Assets públicos
 
 > [!IMPORTANT]
 > _Asegúrate de instalar o incluir las librerías necesarias antes de ejecutar la aplicación._
