@@ -29,12 +29,14 @@ Para activarlo:
 3. Si no lo necesitas, borra `.github/workflows/sonarcloud.yml` y `sonar-project.properties`.
 
 🛠️ Estructura de directorios
+
 App/
 ├── Config/       # Configuraciones
 ├── Controllers/  # Lógica de aplicación
 ├── Models/       # Acceso a datos
 ├── Views/        # Plantillas
 ├── Public/       # Assets públicos
+
 
 > [!IMPORTANT]
 > _Asegúrate de instalar o incluir las librerías necesarias antes de ejecutar la aplicación._
