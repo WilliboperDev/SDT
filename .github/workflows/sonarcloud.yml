@@ -55,18 +55,20 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       
       - name: Verify SonarQube configuration
-        id: check_sonar
+        id: verify_sonar
+        shell: pwsh  # Especifica PowerShell como shell
         run: |
-          if [ -z "$SONAR_TOKEN" ]; then
-            echo "sonar_skip=true" >> $GITHUB_OUTPUT
-          else
-            echo "sonar_skip=false" >> $GITHUB_OUTPUT
-          fi
+          if (-not [string]::IsNullOrEmpty("$env:SONAR_TOKEN")) {
+            Write-Output "sonar_enabled=true" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          } else {
+            Write-Output "sonar_enabled=false" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+            Write-Output "::notice::SonarQube scan skipped because SONAR_TOKEN is not set"
+          }
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: SonarQube Scan
-        if: steps.check_sonar.outputs.sonar_skip == 'false' # 👈 Se ejecuta solo si existe los secrets
+        if: steps.verify_sonar.outputs.sonar_enabled == 'true' # 👈 Se ejecuta solo si existe los secrets
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
