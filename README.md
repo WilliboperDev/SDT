@@ -26,7 +26,7 @@ Para activarlo:
    - `SONAR_TOKEN` (token de SonarCloud).
    - `SONAR_PROJECT_KEY` (ej: `TuUsuario_MiProyecto`).
    - `SONAR_ORG` (nombre de tu organización).
-3. Si no lo necesitas, borra `.github/workflows/sonarcloud.yml` y ` sonar-project.properties`.
+3. Si no lo necesitas, borra `.github/workflows/sonarcloud.yml` y `sonar-project.properties`.
 
 > [!IMPORTANT]
 > _Asegúrate de instalar o incluir las librerías necesarias antes de ejecutar la aplicación._
