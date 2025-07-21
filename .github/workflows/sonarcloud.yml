@@ -55,7 +55,7 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
           
       - name: SonarQube Scan
-        if: github.event_name == 'workflow_dispatch' || (secrets.SONAR_TOKEN != '') # 👈 Se ejecuta solo si existe los secrets
+        if: ${{ github.event_name == 'workflow_dispatch' || contains(fromJson('["SONAR_TOKEN"]'), secrets) }} # 👈 Se ejecuta solo si existe los secrets
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
