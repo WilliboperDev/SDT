@@ -41,9 +41,9 @@ App/
 
 ├── Models/ (Acceso a datos)
 
-├── Views/           # Plantillas
+├── Views/ (Plantillas)
 
-├── Public/          # Assets públicos
+├── Public/ (Assets públicos)
 
 ---
 ## 📄 Licencia
