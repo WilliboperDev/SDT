@@ -35,11 +35,11 @@ Para activarlo:
 
 App/
 
-├── Config/          # Configuraciones
+├── Config/ (Configuraciones)
 
-├── Controllers/     # Lógica de aplicación
+├── Controllers/ (Lógica de aplicación)
 
-├── Models/          # Acceso a datos
+├── Models/ (Acceso a datos)
 
 ├── Views/           # Plantillas
 
