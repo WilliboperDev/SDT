@@ -35,17 +35,17 @@ Para activarlo:
 
 App/
 
-├── Config/       # Configuraciones
+├── Config/          # Configuraciones
 
-├── Controllers/  # Lógica de aplicación
+├── Controllers/     # Lógica de aplicación
 
-├── Models/       # Acceso a datos
+├── Models/          # Acceso a datos
 
-├── Views/        # Plantillas
+├── Views/           # Plantillas
 
-├── Public/       # Assets públicos
+├── Public/          # Assets públicos
 
 ---
-📄 Licencia
+## 📄 Licencia
 
 MIT License © 2025 Williboper Dev
