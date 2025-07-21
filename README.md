@@ -35,4 +35,5 @@ Para activarlo:
 
 ---
 📄 Licencia
+
 MIT License © 2025 Williboper Dev
