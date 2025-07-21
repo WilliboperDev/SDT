@@ -31,6 +31,7 @@ Para activarlo:
 ## 🛠️ Estructura de directorios
 
 App/
+
 ├── Config/       # Configuraciones
 ├── Controllers/  # Lógica de aplicación
 ├── Models/       # Acceso a datos
