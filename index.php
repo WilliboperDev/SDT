@@ -49,7 +49,7 @@
     <div id="overlay" class="overlay"></div> <!-- Overlay (fondo opaco) -->
     <!-- Loader de inicio -->
     <div id="loader-index" class="loader-index">
-        <span id="loader-message">Sistema de Directorio telefónico<br>&copy; 2025 Williboper.</span>
+        <span id="loader-message">Sistema de Directorio telefónico<br>&copy; 2025 Williboper Dev.</span>
     </div> 
     <!-- Loader de validacion -->
     <div id="loader-vali" class="loader-vali"></div>
